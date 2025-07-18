@@ -72,6 +72,10 @@ export default {
 					darker: '#010409'
 				}
 			},
+			fontFamily: {
+				'cyber': ['Orbitron', 'monospace'],
+				'tech': ['Rajdhani', 'sans-serif']
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -113,6 +117,10 @@ export default {
 					'60%': { transform: 'translate(2px, 2px)' },
 					'80%': { transform: 'translate(2px, -2px)' },
 					'100%': { transform: 'translate(0)' }
+				},
+				'hover-glow': {
+					'0%': { boxShadow: '0 0 10px rgba(0, 255, 255, 0.5)' },
+					'100%': { boxShadow: '0 0 20px rgba(0, 255, 255, 0.8), 0 0 30px rgba(0, 255, 255, 0.6)' }
 				}
 			},
 			animation: {
@@ -121,7 +129,8 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite',
-				'glitch': 'glitch 0.3s ease-in-out infinite'
+				'glitch': 'glitch 0.3s ease-in-out infinite',
+				'hover-glow': 'hover-glow 0.3s ease-in-out forwards'
 			}
 		}
 	},

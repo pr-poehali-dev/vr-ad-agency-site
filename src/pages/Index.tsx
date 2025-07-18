@@ -1,32 +1,77 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import Icon from "@/components/ui/icon";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-cyber-darker text-cyber-blue">
-      {/* Header */}
-      <header className="border-b border-cyber-blue/30 bg-cyber-dark/90 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Icon name="Zap" className="text-cyber-blue animate-pulse-glow" size={32} />
-              <h1 className="text-2xl font-bold cyber-font text-cyber-blue">VR AGENCY</h1>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="#services" className="hover:text-cyber-magenta transition-colors">Услуги</a>
-              <a href="#portfolio" className="hover:text-cyber-magenta transition-colors">Портфолио</a>
-              <a href="#team" className="hover:text-cyber-magenta transition-colors">Команда</a>
-              <a href="#contact" className="hover:text-cyber-magenta transition-colors">Контакты</a>
-            </nav>
-            <Button className="bg-cyber-magenta hover:bg-cyber-magenta/80 text-white cyber-font">
-              Связаться
-            </Button>
-          </div>
-        </div>
-      </header>
+  const [hoveredService, setHoveredService] = useState<number | null>(null);
 
+  const services = [
+    {
+      icon: "Zap",
+      title: "VR Реклама",
+      description: "Интерактивная реклама в виртуальном пространстве",
+      features: ["360° презентации", "Интерактивные элементы", "Аналитика взаимодействий"]
+    },
+    {
+      icon: "Globe",
+      title: "VR Шоу-румы",
+      description: "Виртуальные выставочные залы нового поколения",
+      features: ["Фотореалистичные модели", "Виртуальные консультанты", "Онлайн-покупки"]
+    },
+    {
+      icon: "Gamepad2",
+      title: "VR Игры",
+      description: "Брендированные VR-игры для маркетинга",
+      features: ["Кастомные механики", "Брендинг продуктов", "Вирусный контент"]
+    }
+  ];
+
+  const portfolio = [
+    {
+      title: "VR Автосалон Mercedes",
+      description: "Виртуальный тест-драйв новых моделей",
+      image: "🚗",
+      category: "Автомобили"
+    },
+    {
+      title: "VR Квартира для ЖК",
+      description: "Интерактивная экскурсия по новостройке",
+      image: "🏠",
+      category: "Недвижимость"
+    },
+    {
+      title: "VR Музей космоса",
+      description: "Погружение в историю освоения космоса",
+      image: "🚀",
+      category: "Образование"
+    }
+  ];
+
+  const team = [
+    {
+      name: "Алексей Новиков",
+      role: "VR Директор",
+      description: "15 лет в геймдеве, эксперт по VR-технологиям",
+      avatar: "👨‍💻"
+    },
+    {
+      name: "Мария Космос",
+      role: "3D Художник",
+      description: "Создаёт фотореалистичные виртуальные миры",
+      avatar: "👩‍🎨"
+    },
+    {
+      name: "Дмитрий Код",
+      role: "VR Разработчик",
+      description: "Программист с опытом в Unity и Unreal Engine",
+      avatar: "👨‍💼"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-cyber-darker via-cyber-dark to-black text-white font-tech overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-cyber-dark via-cyber-darker to-black opacity-90"></div>
@@ -39,87 +84,85 @@ const Index = () => {
             <Badge className="mb-6 bg-cyber-blue/20 text-cyber-blue border-cyber-blue">
               🚀 Будущее уже здесь
             </Badge>
-            <h2 className="text-6xl md:text-8xl font-bold cyber-font mb-6 animate-glitch">
-              <span className="text-cyber-blue">VR</span>{" "}
-              <span className="text-cyber-magenta">РЕАЛЬНОСТЬ</span>
-            </h2>
-            <p className="text-xl md:text-2xl mb-8 text-cyber-blue/80 max-w-3xl mx-auto">
-              Создаем интерактивные VR-инсталляции для выставок и мероприятий. 
-              Погрузите аудиторию в мир будущего с нашими цифровыми решениями.
+            <h1 className="text-6xl md:text-8xl font-cyber font-black mb-6 bg-gradient-to-r from-cyber-blue via-cyber-magenta to-cyber-yellow bg-clip-text text-transparent animate-pulse-glow">
+              NEXUS VR
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto font-light">
+              Создаём <span className="text-cyber-blue font-semibold">VR-миры будущего</span>
+              <br />
+              Реклама • Презентации • Шоу-румы в виртуальной реальности
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-cyber-blue hover:bg-cyber-blue/80 text-cyber-dark cyber-font animate-pulse-glow">
-                <Icon name="Play" className="mr-2" size={20} />
-                Смотреть демо
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-cyber-blue to-cyber-magenta hover:from-cyber-magenta hover:to-cyber-blue text-white border-0 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyber-blue/50"
+              >
+                <Icon name="Zap" className="mr-2" />
+                Создать VR-проект
               </Button>
-              <Button size="lg" variant="outline" className="border-cyber-magenta text-cyber-magenta hover:bg-cyber-magenta/20 cyber-font">
-                <Icon name="Headphones" className="mr-2" size={20} />
-                Попробовать VR
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black px-8 py-4 text-lg font-semibold transition-all duration-300"
+              >
+                <Icon name="Play" className="mr-2" />
+                Посмотреть демо
               </Button>
             </div>
           </div>
         </div>
+
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 text-6xl animate-float">🌌</div>
+        <div className="absolute bottom-20 right-10 text-4xl animate-float" style={{animationDelay: '1s'}}>✨</div>
+        <div className="absolute top-1/3 right-20 text-5xl animate-float" style={{animationDelay: '2s'}}>🎮</div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-cyber-dark/50">
+      <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold cyber-font mb-4 text-cyber-blue">Наши Услуги</h3>
-            <p className="text-xl text-cyber-blue/70 max-w-2xl mx-auto">
-              Полный спектр VR-решений для бизнеса и развлечений
+            <Badge className="mb-4 bg-cyber-magenta/20 text-cyber-magenta border-cyber-magenta">
+              Наши услуги
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-cyber font-bold mb-4 text-cyber-blue">
+              VR-Решения для бизнеса
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Превращаем ваши идеи в интерактивные VR-миры
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "Globe",
-                title: "VR-Инсталляции",
-                description: "Интерактивные виртуальные миры для выставок и мероприятий",
-                color: "cyber-blue"
-              },
-              {
-                icon: "Gamepad2",
-                title: "Игровые Решения",
-                description: "Создание VR-игр и интерактивных развлечений",
-                color: "cyber-magenta"
-              },
-              {
-                icon: "Building",
-                title: "Архитектурная Визуализация",
-                description: "VR-туры по зданиям и комплексам",
-                color: "cyber-yellow"
-              },
-              {
-                icon: "Presentation",
-                title: "Корпоративные Презентации",
-                description: "Иммерсивные презентации продуктов и услуг",
-                color: "cyber-green"
-              },
-              {
-                icon: "Users",
-                title: "Обучающие Симуляции",
-                description: "VR-тренинги и образовательные программы",
-                color: "cyber-purple"
-              },
-              {
-                icon: "Sparkles",
-                title: "Консалтинг",
-                description: "Стратегия внедрения VR-технологий в бизнес",
-                color: "cyber-blue"
-              }
-            ].map((service, index) => (
-              <Card key={index} className="bg-cyber-dark/80 border-cyber-blue/30 hover:border-cyber-magenta/50 transition-all duration-300 hover:scale-105 animate-fade-in">
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg bg-${service.color}/20 flex items-center justify-center mb-4`}>
-                    <Icon name={service.icon} className={`text-${service.color}`} size={24} />
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card 
+                key={index}
+                className="bg-cyber-dark/50 border-cyber-blue/30 hover:border-cyber-blue transition-all duration-300 hover:shadow-lg hover:shadow-cyber-blue/20 cursor-pointer"
+                onMouseEnter={() => setHoveredService(index)}
+                onMouseLeave={() => setHoveredService(null)}
+              >
+                <CardHeader className="text-center">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-magenta flex items-center justify-center transition-all duration-300 ${hoveredService === index ? 'animate-pulse-glow scale-110' : ''}`}>
+                    <Icon name={service.icon} size={32} className="text-white" />
                   </div>
-                  <CardTitle className="text-cyber-blue cyber-font">{service.title}</CardTitle>
-                  <CardDescription className="text-cyber-blue/70">
+                  <CardTitle className="text-cyber-blue font-cyber text-xl">
+                    {service.title}
+                  </CardTitle>
+                  <CardDescription className="text-gray-300">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-gray-300">
+                        <Icon name="Check" size={16} className="text-cyber-green mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -127,48 +170,49 @@ const Index = () => {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20">
+      <section className="py-20 bg-gradient-to-r from-cyber-dark/50 to-cyber-darker/50 relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold cyber-font mb-4 text-cyber-blue">Портфолио</h3>
-            <p className="text-xl text-cyber-blue/70 max-w-2xl mx-auto">
-              Наши лучшие VR-проекты и инсталляции
+            <Badge className="mb-4 bg-cyber-yellow/20 text-cyber-yellow border-cyber-yellow">
+              Портфолио
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-cyber font-bold mb-4 text-cyber-magenta">
+              Наши VR-проекты
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Погружения, которые меняют восприятие
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                image: "img/bcacee68-ce85-4a07-8f39-b231cdbea05e.jpg",
-                title: "Выставка будущего",
-                description: "Интерактивная VR-инсталляция для tech-выставки"
-              },
-              {
-                image: "img/e607e605-e59b-475d-94c5-e22fbe134def.jpg", 
-                title: "Музей науки",
-                description: "Образовательная VR-среда для школьников"
-              },
-              {
-                image: "img/9756924d-1b19-451c-b4a1-dc87e272c55d.jpg",
-                title: "Корпоративный офис",
-                description: "VR-тур по новому офисному комплексу"
-              }
-            ].map((project, index) => (
-              <Card key={index} className="bg-cyber-dark/80 border-cyber-blue/30 hover:border-cyber-magenta/50 transition-all duration-300 hover:scale-105 overflow-hidden">
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyber-dark/80 to-transparent"></div>
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-cyber-blue cyber-font">{project.title}</CardTitle>
-                  <CardDescription className="text-cyber-blue/70">
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {portfolio.map((project, index) => (
+              <Card 
+                key={index}
+                className="bg-cyber-dark/60 border-cyber-magenta/30 hover:border-cyber-magenta transition-all duration-300 hover:shadow-lg hover:shadow-cyber-magenta/20 group cursor-pointer overflow-hidden"
+              >
+                <CardHeader className="relative">
+                  <div className="text-6xl mb-4 text-center group-hover:animate-float">
+                    {project.image}
+                  </div>
+                  <Badge className="absolute top-2 right-2 bg-cyber-blue/20 text-cyber-blue border-cyber-blue text-xs">
+                    {project.category}
+                  </Badge>
+                  <CardTitle className="text-cyber-magenta font-cyber text-lg">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription className="text-gray-300">
                     {project.description}
                   </CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-cyber-magenta text-cyber-magenta hover:bg-cyber-magenta hover:text-black transition-all duration-300"
+                  >
+                    <Icon name="ExternalLink" className="mr-2" size={16} />
+                    Посмотреть проект
+                  </Button>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -176,116 +220,134 @@ const Index = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 bg-cyber-dark/50">
+      <section className="py-20 relative">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold cyber-font mb-4 text-cyber-blue">Команда</h3>
-            <p className="text-xl text-cyber-blue/70 max-w-2xl mx-auto">
-              Эксперты VR-технологий и цифровых решений
+            <Badge className="mb-4 bg-cyber-green/20 text-cyber-green border-cyber-green">
+              Команда
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-cyber font-bold mb-4 text-cyber-green">
+              VR-Космонавты
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Эксперты, которые создают миры будущего
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Алексей Киберов",
-                role: "CEO & VR Developer",
-                description: "10+ лет в разработке VR-решений"
-              },
-              {
-                name: "Мария Техно",
-                role: "3D Artist & Designer",
-                description: "Создатель иммерсивных виртуальных миров"
-              },
-              {
-                name: "Дмитрий Код",
-                role: "Technical Lead",
-                description: "Архитектор VR-платформ и интеграций"
-              }
-            ].map((member, index) => (
-              <Card key={index} className="bg-cyber-dark/80 border-cyber-blue/30 hover:border-cyber-magenta/50 transition-all duration-300 hover:scale-105 text-center">
+            {team.map((member, index) => (
+              <Card 
+                key={index}
+                className="bg-cyber-dark/50 border-cyber-green/30 hover:border-cyber-green transition-all duration-300 hover:shadow-lg hover:shadow-cyber-green/20 text-center group"
+              >
                 <CardHeader>
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-magenta mx-auto mb-4 flex items-center justify-center">
-                    <Icon name="User" className="text-white" size={32} />
+                  <div className="text-6xl mb-4 group-hover:animate-pulse-glow">
+                    {member.avatar}
                   </div>
-                  <CardTitle className="text-cyber-blue cyber-font">{member.name}</CardTitle>
-                  <CardDescription className="text-cyber-magenta font-medium mb-2">
+                  <CardTitle className="text-cyber-green font-cyber text-xl">
+                    {member.name}
+                  </CardTitle>
+                  <CardDescription className="text-cyber-blue font-semibold">
                     {member.role}
                   </CardDescription>
-                  <CardDescription className="text-cyber-blue/70">
-                    {member.description}
-                  </CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300 text-sm">
+                    {member.description}
+                  </p>
+                </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold cyber-font mb-4 text-cyber-blue">Контакты</h3>
-            <p className="text-xl text-cyber-blue/70 max-w-2xl mx-auto">
-              Свяжитесь с нами для обсуждения вашего VR-проекта
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-cyber-blue via-cyber-magenta to-cyber-yellow relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-cyber font-bold mb-6 text-white">
+              Готовы к VR-революции?
+            </h2>
+            <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+              Свяжитесь с нами и получите бесплатную консультацию по VR-проекту
             </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-cyber-dark/80 border-cyber-blue/30">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h4 className="text-2xl font-bold cyber-font text-cyber-blue mb-6">Начните проект</h4>
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-4">
-                        <Icon name="Mail" className="text-cyber-magenta" size={20} />
-                        <span className="text-cyber-blue/80">hello@vragency.com</span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <Icon name="Phone" className="text-cyber-magenta" size={20} />
-                        <span className="text-cyber-blue/80">+7 (999) 123-45-67</span>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <Icon name="MapPin" className="text-cyber-magenta" size={20} />
-                        <span className="text-cyber-blue/80">Москва, Технопарк VR</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-2xl font-bold cyber-font text-cyber-blue mb-6">Социальные сети</h4>
-                    <div className="flex space-x-4">
-                      <Button variant="outline" size="icon" className="border-cyber-blue text-cyber-blue hover:bg-cyber-blue/20">
-                        <Icon name="Github" size={20} />
-                      </Button>
-                      <Button variant="outline" size="icon" className="border-cyber-magenta text-cyber-magenta hover:bg-cyber-magenta/20">
-                        <Icon name="Twitter" size={20} />
-                      </Button>
-                      <Button variant="outline" size="icon" className="border-cyber-yellow text-cyber-yellow hover:bg-cyber-yellow/20">
-                        <Icon name="Linkedin" size={20} />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg" 
+                className="bg-white text-cyber-dark hover:bg-gray-100 border-0 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105"
+              >
+                <Icon name="MessageCircle" className="mr-2" />
+                Связаться с нами
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-white hover:bg-white hover:text-cyber-dark px-8 py-4 text-lg font-semibold transition-all duration-300"
+              >
+                <Icon name="Calendar" className="mr-2" />
+                Заказать демо
+              </Button>
+            </div>
           </div>
         </div>
+        
+        {/* Animated background elements */}
+        <div className="absolute top-10 left-10 text-4xl animate-float text-white/30">🌟</div>
+        <div className="absolute bottom-10 right-10 text-5xl animate-float text-white/30" style={{animationDelay: '1s'}}>🔮</div>
+        <div className="absolute top-1/2 left-1/4 text-3xl animate-float text-white/30" style={{animationDelay: '2s'}}>💫</div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-cyber-blue/30 bg-cyber-dark/90 py-8">
+      <footer className="bg-cyber-darker py-12 border-t border-cyber-blue/20">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Icon name="Zap" className="text-cyber-blue" size={24} />
-              <span className="cyber-font text-cyber-blue font-bold">VR AGENCY</span>
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-2xl font-cyber font-bold text-cyber-blue mb-4">NEXUS VR</h3>
+              <p className="text-gray-400 text-sm">
+                Агентство виртуальной реальности нового поколения
+              </p>
             </div>
-            <div className="text-cyber-blue/60">
-              © 2024 VR Agency. Все права защищены.
+            
+            <div>
+              <h4 className="text-lg font-semibold text-cyber-magenta mb-4">Услуги</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li>VR Реклама</li>
+                <li>VR Шоу-румы</li>
+                <li>VR Игры</li>
+                <li>VR Обучение</li>
+              </ul>
             </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-cyber-yellow mb-4">Контакты</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li>📧 hello@nexusvr.space</li>
+                <li>📱 +7 (495) 123-45-67</li>
+                <li>📍 Москва, Технопарк VR</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-cyber-green mb-4">Социальные сети</h4>
+              <div className="flex space-x-4">
+                <Button variant="outline" size="sm" className="border-cyber-green text-cyber-green hover:bg-cyber-green hover:text-black">
+                  <Icon name="MessageCircle" size={16} />
+                </Button>
+                <Button variant="outline" size="sm" className="border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black">
+                  <Icon name="Share2" size={16} />
+                </Button>
+                <Button variant="outline" size="sm" className="border-cyber-magenta text-cyber-magenta hover:bg-cyber-magenta hover:text-black">
+                  <Icon name="Video" size={16} />
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-cyber-blue/20 mt-8 pt-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 NEXUS VR. Все права защищены. Создано в виртуальной реальности 🚀</p>
           </div>
         </div>
       </footer>
